@@ -1,0 +1,185 @@
+$bg-color: #f5f5f5;
+$text-color: #202020;
+$text-color-secondary: #505050;
+
+$team-primary-color: #ff343e;
+$team-text-color: #f8f8f8;
+
+body {
+  font-family: "Chivo", sans-serif;
+  background-color: $bg-color;
+  color: $text-color;
+}
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  gap: 20px;
+
+  & .home-title {
+    color: rgb(182, 43, 43);
+    font-size: 1.2rem;
+  }
+
+  & .home-description {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  & .home-details {
+    text-align: center;
+    font-size: 1rem;
+    width: 500px;
+    color: $text-color-secondary;
+  }
+
+  & .home-button {
+    background-color: rgb(182, 43, 43);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  & .home-button:hover {
+    background-color: rgb(182, 43, 43, 0.8);
+  }
+}
+
+.main-header {
+  background-color: $team-primary-color;
+  color: $team-text-color;
+  .header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 40px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+      rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+
+    .header-app_name {
+      font-size: 1.5rem;
+      font-weight: bold;
+
+      &:hover {
+        color: white;
+      }
+    }
+
+    .header-button {
+      background-color: white;
+      color: $team-primary-color;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      text-transform: uppercase;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.9);
+      }
+    }
+  }
+
+  .header-bottom > ul {
+    display: flex;
+    padding: 20px 0;
+    justify-content: center;
+    gap: 40px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+      rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+
+    li {
+      list-style: none;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      text-transform: uppercase;
+
+      &:hover {
+        color: white;
+      }
+    }
+  }
+}
+
+.team-container {
+  max-width: 1200px;
+  margin: 3rem auto 0 auto;
+
+  .team-header {
+    display: flex;
+    background-color: $team-primary-color;
+    color: $team-text-color;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+      rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+
+    .team-header_left > img {
+      width: 300px;
+      border-radius: 50%;
+    }
+
+    .team-header_right {
+      padding-left: 1rem;
+
+      & > h1 {
+        font-size: 2.5rem;
+        font-weight: bold;
+      }
+
+      .team-details {
+        margin: 1rem 0 0 1rem;
+      }
+    }
+  }
+
+  .team-drivers {
+    background-color: $team-primary-color;
+    color: $team-text-color;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    margin-top: 2rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+      rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+
+    .team-driver_container {
+      display: flex;
+      background-color: $bg-color;
+      color: $team-primary-color;
+      padding: 1rem 2rem;
+      border-radius: 10px;
+      margin-top: 1rem;
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+
+      box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+        rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+      & > img {
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+          rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+        width: 100px;
+        border-radius: 50%;
+      }
+
+      & > h2 {
+        font-size: 2rem;
+        margin-left: 1rem;
+        font-weight: bold;
+      }
+
+      &:hover {
+        transform: scale(1.02);
+      }
+    }
+  }
+}
