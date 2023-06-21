@@ -111,11 +111,13 @@ body {
   }
 }
 
-.team-container {
+.team-container,
+.driver-container {
   max-width: 1200px;
   margin: 3rem auto 0 auto;
 
-  .team-header {
+  .team-header,
+  .driver-header {
     display: flex;
     background-color: $team-primary-color;
     color: $team-text-color;
@@ -129,7 +131,13 @@ body {
       border-radius: 50%;
     }
 
-    .team-header_right {
+    .driver-header_left > img {
+      width: 200px;
+      border-radius: 50%;
+    }
+
+    .team-header_right,
+    .driver-header_right {
       padding-left: 1rem;
 
       & > h1 {
@@ -137,8 +145,13 @@ body {
         font-weight: bold;
       }
 
-      .team-details {
+      .team-details,
+      .driver-details {
         margin: 1rem 0 0 1rem;
+      }
+
+      .driver-details p {
+        font-size: 1.5rem;
       }
     }
   }
