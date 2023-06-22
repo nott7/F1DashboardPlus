@@ -10,9 +10,9 @@ const DriverHeader = () => {
       <div className="driver-header_right">
         <h1>Charles Leclerc</h1>
         <div className="driver-details">
-          <p>Nato il: 16/10/1997</p>
-          <p>Luogo di nascita: Monte Carlo, Monaco</p>
-          <p>Numero: 16</p>
+          <p>Born on: 16/10/1997</p>
+          <p>Place of Birth: Monte Carlo, Monaco</p>
+          <p>Number: 16</p>
         </div>
       </div>
     </header>

@@ -11,6 +11,22 @@ body {
   color: $text-color;
 }
 
+button {
+  background-color: white;
+  color: $team-primary-color;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+}
+
 .home-container {
   display: flex;
   flex-direction: column;
@@ -71,22 +87,6 @@ body {
         color: white;
       }
     }
-
-    .header-button {
-      background-color: white;
-      color: $team-primary-color;
-      border: none;
-      border-radius: 5px;
-      padding: 10px 20px;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      text-transform: uppercase;
-
-      &:hover {
-        background-color: rgba(255, 255, 255, 0.9);
-      }
-    }
   }
 
   .header-bottom > ul {
@@ -111,18 +111,21 @@ body {
   }
 }
 
-.team-container,
-.driver-container {
+main {
   max-width: 1200px;
   margin: 3rem auto 0 auto;
 
   .team-header,
-  .driver-header {
+  .driver-header,
+  .driver-stats_container,
+  .employees-header,
+  .scouting-header {
     display: flex;
     background-color: $team-primary-color;
     color: $team-text-color;
     padding: 1rem 2rem;
     border-radius: 10px;
+    margin-top: 2rem;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
       rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
 
@@ -138,7 +141,7 @@ body {
 
     .team-header_right,
     .driver-header_right {
-      padding-left: 1rem;
+      padding-left: 2rem;
 
       & > h1 {
         font-size: 2.5rem;
@@ -147,13 +150,16 @@ body {
 
       .team-details,
       .driver-details {
-        margin: 1rem 0 0 1rem;
+        margin: 1rem 0;
       }
 
       .driver-details p {
         font-size: 1.5rem;
       }
     }
+  }
+  .employees-header, .scouting-header{
+    justify-content: space-between;
   }
 
   .team-drivers {
@@ -174,6 +180,7 @@ body {
       margin-top: 1rem;
       transition: all 0.3s ease-in-out;
       cursor: pointer;
+      align-items: center;
 
       box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
         rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
@@ -186,12 +193,78 @@ body {
 
       & > h2 {
         font-size: 2rem;
-        margin-left: 1rem;
         font-weight: bold;
+        margin-left: 2rem;
       }
 
       &:hover {
         transform: scale(1.02);
+      }
+    }
+  }
+
+  .driver-stats_container {
+    flex-direction: column;
+
+    & > h2 {
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .driver-stats_list {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+      width: 100%;
+
+      .driver-stats_item {
+        width: 33%;
+        padding: 1rem 2rem;
+        border-radius: 10px;
+        background-color: $bg-color;
+        color: $team-primary-color;
+        margin-bottom: 2rem;
+        box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+          rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+
+        & > h3 {
+          font-size: 1.5rem;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  .teams-item {
+    display: flex;
+    background-color: $team-primary-color;
+    color: $team-text-color;
+    padding: 1rem;
+    border-radius: 10px;
+    margin-top: 1rem;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+      rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+
+    &:hover {
+      transform: scale(1.02);
+    }
+
+    & > a {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      & > img {
+        width: 200px;
+      }
+
+      & > p {
+        font-size: 2rem;
+        margin-left: 1rem;
+        font-weight: bold;
       }
     }
   }

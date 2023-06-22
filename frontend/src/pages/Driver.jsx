@@ -1,16 +1,19 @@
-import React from 'react'
-import Header from '../components/Header'
-import DriverHeader from '../components/Driver/DriverHeader'
+import React from "react";
+import Header from "../components/Header";
+import DriverHeader from "../components/Driver/DriverHeader";
+import DriverStats from "../components/Driver/DriverStats";
 
 const Driver = () => {
   return (
     <>
-    <Header />
-    <main className="driver-container">
+      <Header />
+      <main className="driver-container">
         <DriverHeader />
-    </main>
+        {/* TODO: Far si che DriverDetails sia un menu a tendina */}
+        <DriverStats />
+      </main>
     </>
-  )
-}
+  );
+};
 
-export default Driver
+export default Driver;
