@@ -1,10 +1,10 @@
 import React from 'react'
 
-const EmployeesHeader = () => {
+const EmployeesHeader = ({showModal}) => {
   return (
     <header className='employees-header'>
         <h1>Employees</h1>
-        <button>Add Employee</button>
+        <button onClick={showModal}>Add Employee</button>
     </header>
   )
 }

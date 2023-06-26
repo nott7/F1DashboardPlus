@@ -1,10 +1,11 @@
 import React from 'react'
 
-const ScoutingHeader = () => {
+const ScoutingHeader = ({showModal}) => {
+
   return (
     <header className='scouting-header'>
         <h1>Scouting</h1>
-        <button>Add Driver</button>
+        <button onClick={showModal}>Add Driver</button>
     </header>
   )
 }

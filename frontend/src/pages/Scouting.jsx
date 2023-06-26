@@ -1,17 +1,30 @@
-import React from 'react'
-import Header from '../components/Header'
-import ScoutingHeader from '../components/Scouting/ScoutingHeader'
+import React, {useState} from "react";
+import Header from "../components/Header";
+import ScoutingHeader from "../components/Scouting/ScoutingHeader";
+import Modal from "../components/Modal";
 
 const Scouting = () => {
+  const [modal, setModal] = useState(false);
+
+  const showModal = () => {
+    setModal(true);
+  };
+
+  const closeModal = () => {
+    setModal(false);
+  };
+
   return (
     <>
-        <Header />
-        <main className="scouting-container">
-            <ScoutingHeader />
+      {modal && <div className="backdrop" onClick={closeModal}></div>}
+      <Header />
+      <main className="scouting-container">
+        <ScoutingHeader showModal={showModal} />
+      </main>
 
-        </main>
+      {modal && <Modal closeModal={closeModal} page="scouting"/>}
     </>
-  )
-}
+  );
+};
 
-export default Scouting
+export default Scouting;
