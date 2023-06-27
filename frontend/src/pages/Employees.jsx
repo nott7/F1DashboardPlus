@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import Header from "../components/Header";
 import EmployeesHeader from "../components/Employees/EmployeesHeader";
 import Modal from "../components/Modal";
+import ListItem from "../components/ListItem";
 
 const Employees = () => {
   const [modal, setModal] = useState(false);
@@ -20,6 +21,11 @@ const Employees = () => {
       <Header />
       <main className="employees-container">
         <EmployeesHeader showModal={showModal}/>
+        <ul>
+          <ListItem />
+          <ListItem />
+          <ListItem />
+        </ul>
       </main>
       {modal && <Modal closeModal={closeModal} page="employees"/>}
     </>

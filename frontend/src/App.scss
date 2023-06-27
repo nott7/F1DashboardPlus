@@ -6,6 +6,7 @@ $team-primary-color: #ff343e;
 $team-text-color: #f8f8f8;
 
 //TODO - Rivalutare i colori sui bottoni
+//TODO - Fare variabile per box-shadow
 
 body {
   font-family: "Chivo", sans-serif;
@@ -202,6 +203,32 @@ button {
 main {
   max-width: 1200px;
   margin: 3rem auto 0 auto;
+
+  .list-item{
+    background-color: $team-primary-color;
+    color: $team-text-color;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    display: flex;
+    margin-bottom: 2rem;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+    rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+
+    .list-item_left {
+      width: 100px;
+      margin-right: 2rem;
+
+      & > img {
+        border-radius: 50%;
+      }
+    }
+
+    .list-item_right {
+      width: 100%;
+    }
+
+  }
 
   .team-header,
   .driver-header,
