@@ -21,7 +21,7 @@ export const getDrivers = async (req, res) => {
 
   const drivers = await Driver.find();
 
-  res.status(200).send({ drivers: drivers });
+  res.status(200).send(drivers);
 };
 
 export const getDriver = async (req, res) => {
@@ -37,5 +37,5 @@ export const getDriver = async (req, res) => {
       .status(200)
       .send({ data: {}, error: true, message: "Driver not found" });
   }
-  res.status(200).send({ driver: driver });
+  res.status(200).send(driver);
 };

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+// usare useContext per gestire il login
 
 const Login = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const Login = () => {
   }
 
   axios.defaults.withCredentials = true;
-  
+
   async function handleSubmit(e) {
     e.preventDefault();
     const res = await axios.post("http://localhost:3000/auth/login", {

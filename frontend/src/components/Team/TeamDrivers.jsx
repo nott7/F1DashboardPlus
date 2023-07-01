@@ -1,23 +1,37 @@
 import React, { useState, useEffect } from "react";
 import TeamDriver from "./TeamDriver";
+import axios from "axios";
 import { Link } from "react-router-dom";
 
-const TeamDrivers = ({team}) => {
-//TODO fetch drivers
+const TeamDrivers = ({ driversIDs }) => {
+  const [drivers, setDrivers] = useState([]);
+
+  useEffect(() => {
+    async function fetchDrivers() {
+      const drivers = [];
+      for (let i = 0; i < driversIDs.length; i++) {
+        const res = await axios.get(
+          `http://localhost:3000/drivers/${driversIDs[i]}`
+        );
+        const driver = res.data;
+        drivers.push(driver);
+      }
+      setDrivers(drivers);
+    }
+    fetchDrivers();
+  }, [driversIDs]);
+
   return (
     <section className="team-drivers">
       <h2>Drivers</h2>
       <ul className="team-drivers-list">
-        <li className="team-driver">
-          <Link to="/drivers/1">
-            <TeamDriver />
-          </Link>
-        </li>
-        <li className="team-driver">
-          <Link to="/drivers/1">
-            <TeamDriver />
-          </Link>
-        </li>
+        {drivers.map((driver) => (
+          <li className="team-driver" key={driver._id}>
+            <Link to={`/drivers/${driver._id}`}>
+              <TeamDriver driver={driver} />
+            </Link>
+          </li>
+        ))}
       </ul>
     </section>
   );

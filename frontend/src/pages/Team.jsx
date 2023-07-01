@@ -8,10 +8,10 @@ import axios from "axios";
 const Team = () => {
   const { id } = useParams();
   const [team, setTeam] = useState({});
+  //cambiare immagine alfaromeo
 
   useEffect(() => {
     async function fetchTeam() {
-      console.log(id);
       const res = await axios.get(`http://localhost:3000/teams/${id}`);
       setTeam(res.data);
       console.log(res.data);
@@ -21,10 +21,10 @@ const Team = () => {
 
   return (
     <>
-      <Header teamName={team.name}/>
+      <Header/>
       <main className="team-container">
         <TeamHeader team = {team}/>
-        <TeamDrivers team = {team}/>
+        <TeamDrivers driversIDs = {team.drivers}/>
       </main>
     </>
   );

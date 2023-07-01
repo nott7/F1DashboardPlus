@@ -1,18 +1,17 @@
 import React from "react";
-import DriverImage from "../../assets/team-driver.png";
 
-const DriverHeader = () => {
+const DriverHeader = ({driver}) => {
   return (
     <header className="driver-header">
       <div className="driver-header_left">
-        <img src={DriverImage} alt="Driver" />
+        <img src={driver.imgUrl} alt="Driver" />
       </div>
       <div className="driver-header_right">
-        <h1>Charles Leclerc</h1>
+        <h1>{driver.name} {driver.surname}</h1>
         <div className="driver-details">
-          <p>Born on: 16/10/1997</p>
-          <p>Place of Birth: Monte Carlo, Monaco</p>
-          <p>Number: 16</p>
+          <p>Born on: {driver.birthDate}</p>
+          <p>Place of Birth: {driver.birthPlace}</p>
+          <p>Number: {driver.carNumber}</p>
         </div>
       </div>
     </header>
