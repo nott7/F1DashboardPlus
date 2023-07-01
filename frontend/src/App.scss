@@ -116,7 +116,7 @@ button {
   }
 }
 
-.home-container {
+.home-container, .login-container{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -124,24 +124,67 @@ button {
   height: 100vh;
   gap: 20px;
 
-  & .home-title {
+  .home-title, .login-title {
     color: rgb(182, 43, 43);
     font-size: 1.2rem;
   }
 
-  & .home-description {
+  .login-title {
+    font-size: 2rem;
+  }
+
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 500px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+      rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+
+    input {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+
+      &:focus {
+        background-color: #f5f5f5;
+        outline: none;
+      }
+    }
+    button {
+      background-color: rgb(182, 43, 43);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: rgb(182, 43, 43, 0.8);
+    }
+  }
+
+
+
+  .home-description {
     font-size: 2rem;
     font-weight: bold;
   }
 
-  & .home-details {
+  .home-details {
     text-align: center;
     font-size: 1rem;
     width: 500px;
     color: $text-color-secondary;
   }
 
-  & .home-button {
+  .home-button {
     background-color: rgb(182, 43, 43);
     color: white;
     border: none;
@@ -152,7 +195,7 @@ button {
     cursor: pointer;
   }
 
-  & .home-button:hover {
+  .home-button:hover {
     background-color: rgb(182, 43, 43, 0.8);
   }
 }
@@ -243,10 +286,10 @@ main {
     margin-top: 2rem;
     box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
       rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+    align-items: center;
 
     .team-header_left > img {
-      width: 300px;
-      border-radius: 50%;
+      width: 100px;
     }
 
     .driver-header_left > img {

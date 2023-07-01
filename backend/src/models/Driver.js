@@ -15,7 +15,7 @@ const driverSchema = new mongoose.Schema({
     required: true,
   },
   birthDate: {
-    type: Date,
+    type: String,
     required: true,
   },
   birthPlace: {
@@ -50,10 +50,7 @@ const driverSchema = new mongoose.Schema({
     type: Number,
     required: true,
   },
-  bestFinalResult: {
-    type: Number,
-    required: true,
-  },
+  bestFinalResult: Number,
 });
 
 export default mongoose.model("Driver", driverSchema);

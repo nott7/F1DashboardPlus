@@ -1,14 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Header = () => {
+const Header = ({teamName}) => {
   return (
     <header className="main-header">
       <div className="header-top">
         <Link to="/teams/1">
           <p className="header-app_name">F1Dashboard+</p>
         </Link>
-        <h1 className="header-team_name">Scuderia Ferrari</h1>
+        <h1 className="header-team_name">{teamName}</h1>
         <button className="header-button">Logout</button>
       </div>
       <nav className="header-bottom">

@@ -28,10 +28,7 @@ const teamSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  drivers: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Driver",
-  },
+  drivers: [String],
   teamsWorldChampionships: {
     type: Number,
     required: true,

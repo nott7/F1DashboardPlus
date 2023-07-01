@@ -11,7 +11,7 @@ const Home = () => {
         scouting, and team member management.
       </p>
       {/* TODO: Add link to login page */}
-      <Link to="/teams/1">
+      <Link to="/login">
         <button className="home-button">Monitor Your Team!</button>
       </Link>
     </div>

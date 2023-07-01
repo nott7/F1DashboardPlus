@@ -1,9 +1,10 @@
 import Team from "../models/Team.js";
 import bcrypt from "bcryptjs";
 
-export const signup = async (req, res) => { //Sign up come gia' detto non sara' nel front-end, ma solo nel back-end, 
-    // perche' non vogliamo che gli utenti possano creare un account da soli, ma solo i "direttori della formula 1"
-    // l'ho fatta per creare il database
+export const signup = async (req, res) => {
+  //Sign up come gia' detto non sara' nel front-end, ma solo nel back-end,
+  // perche' non vogliamo che gli utenti possano creare un account da soli, ma solo i "direttori della formula 1"
+  // l'ho fatta per creare il database
   try {
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(req.body.password, salt);
@@ -39,7 +40,9 @@ export const login = async (req, res) => {
     }
 
     req.session.team = team;
-    res.status(200).send({ message: "Team logged in successfully"});
+    res
+      .status(200)
+      .send({ message: "Team logged in successfully", teamID: team._id});
   } catch (error) {
     res.status(200).send({ data: {}, error: true, message: error.message });
   }

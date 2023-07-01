@@ -1,18 +1,18 @@
 import React from "react";
 import TeamLogoImage from "../../assets/team-logo.png";
 
-const TeamHeader = () => {
+const TeamHeader = ({ team }) => {
   return (
     <header className="team-header">
       <div className="team-header_left">
-        <img src={TeamLogoImage} alt="Team Logo" />
+        <img src={team.imgUrl} alt="Team Logo" />
       </div>
       <div className="team-header_right">
-        <h1>Scuderia Ferrari</h1>
+        <h1>{team.name}</h1>
         <div className="team-details">
-            <p>Team Principal: Frédéric Vasseur</p>
-            <p>Team World Championships: 16</p>
-            <p>Driver World Championships: 15</p>
+          <p>Team Principal: {team.teamPrincipal}</p>
+          <p>Team World Championships: {team.teamsWorldChampionships}</p>
+          <p>Driver World Championships: {team.driversWorldChampionships}</p>
         </div>
       </div>
     </header>
