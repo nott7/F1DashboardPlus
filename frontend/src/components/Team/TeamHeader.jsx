@@ -1,5 +1,4 @@
 import React from "react";
-import TeamLogoImage from "../../assets/team-logo.png";
 
 const TeamHeader = ({ team }) => {
   return (

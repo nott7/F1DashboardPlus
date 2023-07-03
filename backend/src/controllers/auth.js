@@ -42,7 +42,7 @@ export const login = async (req, res) => {
     req.session.team = team;
     res
       .status(200)
-      .send({ message: "Team logged in successfully", teamID: team._id});
+      .send({ message: "Team logged in successfully", teamID: team._id, teamName: team.name });
   } catch (error) {
     res.status(200).send({ data: {}, error: true, message: error.message });
   }

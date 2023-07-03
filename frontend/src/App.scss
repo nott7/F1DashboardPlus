@@ -1,12 +1,13 @@
 $bg-color: #f5f5f5;
-$text-color: #202020;
+$primary-color: #094d92;
+$primary-hover-color: #0c5ca6;
+$text-color: #ecf5fe;
 $text-color-secondary: #505050;
-
-$team-primary-color: #ff343e;
-$team-text-color: #f8f8f8;
+$box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+  rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
 
 //TODO - Rivalutare i colori sui bottoni
-//TODO - Fare variabile per box-shadow
+//TODO - Rivalutare i colori
 
 body {
   font-family: "Chivo", sans-serif;
@@ -27,7 +28,7 @@ body {
 
 button {
   background-color: white;
-  color: $team-primary-color;
+  color: $primary-color;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
@@ -41,7 +42,6 @@ button {
   }
 }
 
-
 .modal-container {
   position: fixed;
   z-index: 100;
@@ -50,15 +50,12 @@ button {
   transform: translate(-50%, -50%);
   width: 1200px;
   display: flex;
-  background-color: $team-primary-color;
-  color: $team-text-color;
+  background-color: $primary-color;
+  color: $text-color;
   padding: 1rem 2rem;
   border-radius: 10px;
   margin-top: 2rem;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
-    rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
-
-
+  box-shadow: $box-shadow;
 
   form {
     display: flex;
@@ -71,14 +68,16 @@ button {
       width: 50%;
       padding: 10px;
 
-      input[type="text"]:focus, select:focus, textarea:focus {
+      input[type="text"]:focus,
+      select:focus,
+      textarea:focus {
         background-color: #f5f5f5;
         outline: none;
       }
 
       &:last-child {
         flex-direction: row;
-        justify-content: space-between; 
+        justify-content: space-between;
         width: 100%;
 
         button {
@@ -100,7 +99,9 @@ button {
         font-weight: bold;
       }
 
-      input, select, textarea {
+      input,
+      select,
+      textarea {
         padding: 10px;
         border: 1px solid #ccc;
         border-radius: 5px;
@@ -111,12 +112,12 @@ button {
         padding: 0;
         border: none;
       }
-      
     }
   }
 }
 
-.home-container, .login-container{
+.home-container,
+.login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -124,8 +125,9 @@ button {
   height: 100vh;
   gap: 20px;
 
-  .home-title, .login-title {
-    color: rgb(182, 43, 43);
+  .home-title,
+  .login-title {
+    color: $primary-color;
     font-size: 1.2rem;
   }
 
@@ -140,9 +142,17 @@ button {
     width: 500px;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
-      rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+    box-shadow: $box-shadow;
 
+    .login-error {
+      color: red;
+      font-size: 0.8rem;
+    }
+
+    label {
+      font-weight: bold;
+      color: $primary-color;
+    }
     input {
       padding: 10px;
       border: 1px solid #ccc;
@@ -150,12 +160,12 @@ button {
       font-size: 1rem;
 
       &:focus {
-        background-color: #f5f5f5;
+        background-color: #f8f8f8;
         outline: none;
       }
     }
     button {
-      background-color: rgb(182, 43, 43);
+      background-color: $primary-color;
       color: white;
       border: none;
       border-radius: 5px;
@@ -166,15 +176,14 @@ button {
     }
 
     button:hover {
-      background-color: rgb(182, 43, 43, 0.8);
+      background-color: $primary-hover-color;
     }
   }
-
-
 
   .home-description {
     font-size: 2rem;
     font-weight: bold;
+    color: $primary-color;
   }
 
   .home-details {
@@ -185,7 +194,7 @@ button {
   }
 
   .home-button {
-    background-color: rgb(182, 43, 43);
+    background-color: $primary-color;
     color: white;
     border: none;
     border-radius: 5px;
@@ -196,21 +205,33 @@ button {
   }
 
   .home-button:hover {
-    background-color: rgb(182, 43, 43, 0.8);
+    background-color: $primary-hover-color;
   }
 }
 
 .main-header {
-  background-color: $team-primary-color;
-  color: $team-text-color;
+  background-color: $primary-color;
+  color: $text-color;
   .header-top {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 20px 40px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
-      rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+    box-shadow: $box-shadow;
 
+    .header-top_left, .header-top_right, .header-top-center {
+      flex: 1;
+    }
+
+    .header-top_center {
+      text-align: center;
+    }
+
+    .header-top_right {
+      text-align: right;
+    }
+
+    
     .header-app_name {
       font-size: 1.5rem;
       font-weight: bold;
@@ -226,8 +247,7 @@ button {
     padding: 20px 0;
     justify-content: center;
     gap: 40px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
-      rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+    box-shadow: $box-shadow;
 
     li {
       list-style: none;
@@ -247,17 +267,21 @@ main {
   max-width: 1200px;
   margin: 3rem auto 0 auto;
 
-  .list-item{
-    background-color: $team-primary-color;
-    color: $team-text-color;
+  & > h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: $primary-color;
+  }
+
+  .list-item {
+    background-color: $primary-color;
+    color: $text-color;
     padding: 1rem 2rem;
     border-radius: 10px;
     display: flex;
     margin-bottom: 2rem;
     width: 100%;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
-    rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
-
+    box-shadow: $box-shadow;
     .list-item_left {
       width: 100px;
       margin-right: 2rem;
@@ -270,31 +294,32 @@ main {
     .list-item_right {
       width: 100%;
     }
-
   }
 
   .team-header,
   .driver-header,
   .driver-stats_container,
   .employees-header,
-  .scouting-header{
+  .scouting-header {
     display: flex;
-    background-color: $team-primary-color;
-    color: $team-text-color;
+    background-color: $primary-color;
+    color: $text-color;
     padding: 1rem 2rem;
     border-radius: 10px;
     margin-top: 2rem;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
-      rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+    box-shadow: $box-shadow;
     align-items: center;
 
-    .team-header_left > img {
-      width: 100px;
+    .team-header_left > img,
+    .driver-header_left > img {
+      width: 180px;
+      aspect-ratio: 1/1;
+      object-fit: contain;
     }
 
     .driver-header_left > img {
-      width: 200px;
       border-radius: 50%;
+      box-shadow: $box-shadow;
     }
 
     .team-header_right,
@@ -309,30 +334,30 @@ main {
       .team-details,
       .driver-details {
         margin: 1rem 0;
-      }
 
-      .driver-details p {
-        font-size: 1.5rem;
+        & > p {
+          font-size: 1.2rem;
+        }
       }
     }
   }
-  .employees-header, .scouting-header{
+  .employees-header,
+  .scouting-header {
     justify-content: space-between;
   }
 
   .team-drivers {
-    background-color: $team-primary-color;
-    color: $team-text-color;
+    background-color: $primary-color;
+    color: $text-color;
     padding: 1rem 2rem;
     border-radius: 10px;
     margin-top: 2rem;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
-      rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+    box-shadow: $box-shadow;
 
     .team-driver_container {
       display: flex;
       background-color: $bg-color;
-      color: $team-primary-color;
+      color: $primary-color;
       padding: 1rem 2rem;
       border-radius: 10px;
       margin-top: 1rem;
@@ -340,11 +365,9 @@ main {
       cursor: pointer;
       align-items: center;
 
-      box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
-        rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+      box-shadow: $box-shadow;  
       & > img {
-        box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
-          rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+        box-shadow: $box-shadow;
         width: 100px;
         border-radius: 50%;
       }
@@ -381,10 +404,9 @@ main {
         padding: 1rem 2rem;
         border-radius: 10px;
         background-color: $bg-color;
-        color: $team-primary-color;
+        color: $primary-color;
         margin-bottom: 2rem;
-        box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
-          rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
+        box-shadow: $box-shadow;
 
         & > h3 {
           font-size: 1.5rem;
@@ -396,17 +418,15 @@ main {
 
   .teams-item {
     display: flex;
-    background-color: $team-primary-color;
-    color: $team-text-color;
+    background-color: $primary-color;
+    color: $text-color;
     padding: 1rem;
     border-radius: 10px;
     margin-top: 1rem;
     transition: all 0.3s ease-in-out;
     cursor: pointer;
 
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
-      rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
-
+    box-shadow: $box-shadow;
     &:hover {
       transform: scale(1.02);
     }
@@ -416,12 +436,14 @@ main {
       align-items: center;
       width: 100%;
       & > img {
-        width: 200px;
+        width: 80px;
+        aspect-ratio: 1/1;
+        object-fit: contain;
       }
 
       & > p {
         font-size: 2rem;
-        margin-left: 1rem;
+        margin-left: 3rem;
         font-weight: bold;
       }
     }

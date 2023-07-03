@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { TeamContext } from "../contexts/TeamContext";
 import axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
-// usare useContext per gestire il login
 
 const Login = () => {
   const navigate = useNavigate();
+  const { setCurrentTeam } = useContext(TeamContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
@@ -27,6 +28,8 @@ const Login = () => {
       setError(true);
     } else {
       const teamID = res.data.teamID;
+      const teamName = res.data.teamName;
+      setCurrentTeam({ _id: teamID, name: teamName });
       navigate(`/teams/${teamID}`);
     }
   }

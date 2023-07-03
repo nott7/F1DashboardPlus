@@ -1,15 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import TeamImage from "../../assets/team-logo.png";
 
-const TeamItem = () => {
+const TeamItem = ({team}) => {
   return (
-    <li className="teams-item">
-      <Link to="/teams/1">
-        <img src={TeamImage} alt="team logo" />
-        <p>Scuderia Ferrari </p>
+      <Link to={`/teams/${team._id}`}>
+        <img src={team.imgUrl} alt="team logo" />
+        <p>{team.name}</p>
       </Link>
-    </li>
   );
 };
 

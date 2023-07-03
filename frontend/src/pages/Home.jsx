@@ -10,7 +10,6 @@ const Home = () => {
         access for Team Principals, providing drivers and teams insights, driver
         scouting, and team member management.
       </p>
-      {/* TODO: Add link to login page */}
       <Link to="/login">
         <button className="home-button">Monitor Your Team!</button>
       </Link>

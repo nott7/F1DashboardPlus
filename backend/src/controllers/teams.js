@@ -18,7 +18,6 @@ export const getTeam = async (req, res) => {
       .send({ data: {}, error: true, message: "You are not logged in" });
   }
 
-  console.log(req.params.id);
   const team = await Team.findById(req.params.id).select({
     password: 0,
     email: 0,
