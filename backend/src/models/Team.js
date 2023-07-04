@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 import { nanoid } from "nanoid";
+import ScoutedDriver from "./ScoutedDriver";
+import Employee from "./Employee";
 
 const teamSchema = new mongoose.Schema({
   _id: {
@@ -29,6 +31,8 @@ const teamSchema = new mongoose.Schema({
     required: true,
   },
   drivers: [String],
+  employees: [Employee.schema],
+  scoutedDrivers: [ScoutedDriver.schema],
   teamsWorldChampionships: {
     type: Number,
     required: true,

@@ -23,7 +23,13 @@ export const getTeam = async (req, res) => {
     email: 0,
   });
   if (!team) {
-    return res.status(200).send({ data: {}, error: true, message: "Team not found", teamID: req.params.id});
+    return res.status(200).send({
+      data: {},
+      error: true,
+      message: "Team not found",
+      teamID: req.params.id,
+    });
   }
   res.status(200).send(team);
 };
+
