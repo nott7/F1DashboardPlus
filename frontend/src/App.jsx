@@ -20,8 +20,8 @@ function App() {
             <Route path="/teams" element={<Teams />} />
             <Route path="/teams/:id" element={<Team />} />
             <Route path="/drivers/:id" element={<Driver />} />
-            <Route path="/employees" element={<Employees />} />
-            <Route path="/scouting" element={<Scouting />} />
+            <Route path="/teams/:id/employees" element={<Employees />} />
+            <Route path="/teams/:id/scouting" element={<Scouting />} />
           </Routes>
       </TeamContextProvider>
     </>

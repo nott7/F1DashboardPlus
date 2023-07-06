@@ -18,10 +18,7 @@ const scoutedDriverSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  imgUrl: {
-    type: String,
-    required: true,
-  },
+  cancelled: Boolean,
   category: {
     type: String,
     required: true,
@@ -29,7 +26,7 @@ const scoutedDriverSchema = new mongoose.Schema({
   description: {
     type: String,
     required: true,
-  }
+  },
 });
 
 export default mongoose.model("ScoutedDriver", scoutedDriverSchema);

@@ -13,11 +13,6 @@ export const createDriver = async (req, res) => {
 };
 
 export const getDrivers = async (req, res) => {
-  if (!req.session.team) {
-    return res
-      .status(401)
-      .send({ data: {}, error: true, message: "You are not logged in" });
-  }
 
   const drivers = await Driver.find();
 
@@ -25,12 +20,6 @@ export const getDrivers = async (req, res) => {
 };
 
 export const getDriver = async (req, res) => {
-  if (!req.session.team) {
-    return res
-      .status(401)
-      .send({ data: {}, error: true, message: "You are not logged in" });
-  }
-
   const driver = await Driver.findById(req.params.id);
   if (!driver) {
     return res

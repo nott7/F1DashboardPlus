@@ -17,6 +17,7 @@ async function main() {
 }
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 app.use(cors({
   origin: ["http://localhost:5173"],
   credentials: true,
@@ -30,9 +31,11 @@ app.use(
     cookie: {
       secure: false, // da passare a true quando passiamo in https
       maxAge: 3600000,
+      sameSite: "none",
     },
   })
 );
+
 app.use("/auth", authRoutes);
 app.use("/teams", teamRoutes)
 app.use("/drivers", driversRoutes)

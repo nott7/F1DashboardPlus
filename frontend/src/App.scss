@@ -219,7 +219,9 @@ button {
     padding: 20px 40px;
     box-shadow: $box-shadow;
 
-    .header-top_left, .header-top_right, .header-top-center {
+    .header-top_left,
+    .header-top_right,
+    .header-top-center {
       flex: 1;
     }
 
@@ -231,7 +233,6 @@ button {
       text-align: right;
     }
 
-    
     .header-app_name {
       font-size: 1.5rem;
       font-weight: bold;
@@ -282,17 +283,24 @@ main {
     margin-bottom: 2rem;
     width: 100%;
     box-shadow: $box-shadow;
-    .list-item_left {
-      width: 100px;
-      margin-right: 2rem;
-
-      & > img {
-        border-radius: 50%;
-      }
-    }
-
-    .list-item_right {
+    .list-item_container {
       width: 100%;
+      display: flex;
+      justify-content: space-between;
+
+      .list-item_settings {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+
+        .list-item_settings-icon {
+          cursor: pointer;
+
+          &:hover {
+            color: $text-color;
+          }
+        }
+      }
     }
   }
 
@@ -365,7 +373,7 @@ main {
       cursor: pointer;
       align-items: center;
 
-      box-shadow: $box-shadow;  
+      box-shadow: $box-shadow;
       & > img {
         box-shadow: $box-shadow;
         width: 100px;

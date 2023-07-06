@@ -18,10 +18,7 @@ const employeeSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  imgUrl: {
-    type: String,
-    required: true,
-  },
+  cancelled: Boolean,
   jobRole: {
     type: String,
     required: true,

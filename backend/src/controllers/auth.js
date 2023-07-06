@@ -47,3 +47,14 @@ export const login = async (req, res) => {
     res.status(200).send({ data: {}, error: true, message: error.message });
   }
 };
+
+export const logout = async (req, res) => {
+  req.session.team = null
+  req.session.save(function (err) {
+    if (err) next(err)
+    req.session.regenerate(function (err) {
+      if (err) next(err)
+      res.status(200).end()
+    })
+  })
+}

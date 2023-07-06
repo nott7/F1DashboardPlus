@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { TeamContext } from "../contexts/TeamContext";
 import axios from "axios";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const navigate = useNavigate();

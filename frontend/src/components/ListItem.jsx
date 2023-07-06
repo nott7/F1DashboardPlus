@@ -1,25 +1,41 @@
 import React from "react";
-//TODO: nome non definitivo (forse)
-//TODO: aggiungere pulsante per rimuovere l'elemento
+import axios from "axios";
+import { TeamContext } from "../contexts/TeamContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 
-const ListItem = () => {
+const ListItem = ({ person }) => {
+  const { team } = React.useContext(TeamContext);
+  async function handleDelete() {
+    const res = await axios.delete(
+      `http://localhost:3000/teams/${team._id}/${
+        person.jobRole ? "employees" : "scoutedDrivers"
+      }/${person._id}`
+    );
+    console.log(res);
+  }
   return (
-    <li className="list-item">
-      <div className="list-item_left">
-        <img src="https://via.placeholder.com/150" alt="placeholder" />
-      </div>
-      <div className="list-item_right">
-        <h3>Name Surname</h3>
-        <p>Job Role</p>
+    <div className="list-item_container">
+      <div className="list-item_details">
+        <h3>
+          {person.name} {person.surname}
+        </h3>
+        <p>{person.jobRole ? person.jobRole : person.category}</p>
+        <p>{person.birthDate}</p>
         <details>
-            <summary>Description</summary>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.
-            </p>
+          <summary>Description</summary>
+          <p>{person.description}</p>
         </details>
       </div>
-    </li>
+      <div className="list-item_settings">
+        <button className="list-item_settings-button">
+          <FontAwesomeIcon icon={faPencil} />
+        </button>
+        <button className="list-item_settings-button" onClick={handleDelete}>
+          <FontAwesomeIcon icon={faTrash} />
+        </button>
+      </div>
+    </div>
   );
 };
 

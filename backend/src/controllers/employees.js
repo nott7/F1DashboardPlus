@@ -12,11 +12,14 @@ export const addEmployee = async (req, res) => {
         message: "Unauthorized access to team",
       });
     }
+
     const employee = new Employee({
       ...req.body,
     });
-    await Team.findByIdAndUpdate(teamID, { $push: { employees: employee } });
-
+    console.log(req.body);
+    await Team.findByIdAndUpdate(teamID, {
+      $push: { employees: employee },
+    });
     res.status(201).send({ message: "Employee created successfully" });
   } catch (error) {
     res.status(500).send({ data: {}, error: true, message: error.message });
@@ -35,15 +38,15 @@ export const updateEmployee = async (req, res) => {
     }
     const employeeID = req.params.employeeID;
 
-    const updatedEmployee = await Team.findByIdAndUpdate(
-      teamID,
-      { $set: { "employees.$[element]": req.body } },
-      { arrayFilters: [{ "element._id": employeeID }] }
+    const updatedEmployee = await Team.findOneAndUpdate(
+      { _id: teamID, "employees._id": employeeID },
+      { $set: { "employees.$": { ...req.body, _id: employeeID } } },
+      { new: true }
     );
 
-    if (!updatedEmployee || updatedEmployee.cancelled) {
+    if (!updatedEmployee) {
       return res
-        .status(200)
+        .status(404)
         .send({ data: {}, error: true, message: "Employee not found" });
     }
 
@@ -69,7 +72,9 @@ export const deleteEmployee = async (req, res) => {
 
     const updatedEmployee = await Team.findOneAndUpdate(
       { _id: teamID, "employees._id": employeeID },
-      { $set: { "employees.$.cancelled": true } }
+      { $setOnInsert: { "employees.$.cancelled": true }
+    },
+    { upsert: true, new: true }
     );
 
     if (!updatedEmployee || updatedEmployee.cancelled) {
@@ -82,7 +87,7 @@ export const deleteEmployee = async (req, res) => {
       message: "Employee cancelled successfully",
     });
   } catch (error) {
-    res.status(500).send({ error: true, message: error.message });
+    res.status(500).send({ data:{}, error: true, message: error.message });
   }
 };
 

@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { nanoid } from "nanoid";
-import ScoutedDriver from "./ScoutedDriver";
-import Employee from "./Employee";
+import ScoutedDriver from "./ScoutedDriver.js";
+import Employee from "./Employee.js";
 
 const teamSchema = new mongoose.Schema({
   _id: {

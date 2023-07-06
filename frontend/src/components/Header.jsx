@@ -1,9 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { Link, useNavigate } from "react-router-dom";
 import { TeamContext } from "../contexts/TeamContext";
 
 const Header = () => {
   const { team } = React.useContext(TeamContext);
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    await axios.post(`http://localhost:3000/auth/logout`);
+    navigate("/");
+  };
+
+
   return (
     <header className="main-header">
       <div className="header-top">
@@ -16,7 +24,7 @@ const Header = () => {
         <h1 className="header-team_name">{team.name}</h1>
         </div>
         <div className="header-top_right">
-        <button className="header-button">Logout</button>
+        <button className="header-button" onClick={handleLogout}>Logout</button>
         </div>
       </div>
       <nav className="header-bottom">
@@ -32,12 +40,12 @@ const Header = () => {
             </Link>
           </li>
           <li className="header-nav-item">
-            <Link to="/employees">
+            <Link to={`/teams/${team._id}/employees`}>
               <p className="header-nav-item-link">Employees</p>
             </Link>
           </li>
           <li className="header-nav-item">
-            <Link to="/scouting">
+            <Link to={`/teams/${team._id}/scouting`}>
               <p className="header-nav-item-link">Scouting</p>
             </Link>
           </li>

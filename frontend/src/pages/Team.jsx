@@ -14,7 +14,6 @@ const Team = () => {
     async function fetchTeam() {
       const res = await axios.get(`http://localhost:3000/teams/${id}`);
       setTeam(res.data);
-      console.log(res.data);
     }
     fetchTeam();
   }, [id]);
