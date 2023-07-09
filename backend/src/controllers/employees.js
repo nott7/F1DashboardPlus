@@ -4,19 +4,9 @@ import Employee from "../models/Employee.js";
 export const addEmployee = async (req, res) => {
   try {
     const teamID = req.params.id;
-
-    if (req.session.team._id !== teamID) {
-      return res.status(403).send({
-        data: {},
-        error: true,
-        message: "Unauthorized access to team",
-      });
-    }
-
     const employee = new Employee({
       ...req.body,
     });
-    console.log(req.body);
     await Team.findByIdAndUpdate(teamID, {
       $push: { employees: employee },
     });
@@ -29,17 +19,14 @@ export const addEmployee = async (req, res) => {
 export const updateEmployee = async (req, res) => {
   try {
     const teamID = req.params.id;
-    if (req.session.team._id !== teamID) {
-      return res.status(403).send({
-        data: {},
-        error: true,
-        message: "Unauthorized access to team",
-      });
-    }
     const employeeID = req.params.employeeID;
 
     const updatedEmployee = await Team.findOneAndUpdate(
-      { _id: teamID, "employees._id": employeeID },
+      {
+        _id: teamID,
+        "employees._id": employeeID,
+        "employees.cancelled": false,
+      },
       { $set: { "employees.$": { ...req.body, _id: employeeID } } },
       { new: true }
     );
@@ -61,45 +48,41 @@ export const updateEmployee = async (req, res) => {
 export const deleteEmployee = async (req, res) => {
   try {
     const teamID = req.params.id;
-    if (req.session.team._id !== teamID) {
-      return res.status(403).send({
-        data: {},
-        error: true,
-        message: "Unauthorized access to team",
-      });
-    }
     const employeeID = req.params.employeeID;
 
     const updatedEmployee = await Team.findOneAndUpdate(
-      { _id: teamID, "employees._id": employeeID },
-      { $setOnInsert: { "employees.$.cancelled": true }
-    },
-    { upsert: true, new: true }
+      {
+        _id: teamID,
+        employees: {
+          $elemMatch: {
+            _id: employeeID,
+            cancelled: false,
+          },
+        },
+      },
+      { $set: { "employees.$.cancelled": true } },
+      { new: true }
     );
 
-    if (!updatedEmployee || updatedEmployee.cancelled) {
-      return res
-        .status(200)
-        .send({ error: true, message: "Employee not found" });
+    if (!updatedEmployee) {
+      return res.status(200).send({
+        data: {},
+        error: true,
+        message: "Employee not found",
+      });
     }
 
     res.status(200).send({
       message: "Employee cancelled successfully",
     });
   } catch (error) {
-    res.status(500).send({ data:{}, error: true, message: error.message });
+    res.status(500).send({ data: {}, error: true, message: error.message });
   }
 };
 
 export const getEmployees = async (req, res) => {
   const teamID = req.params.id;
-  if (req.session.team._id !== teamID) {
-    return res.status(403).send({
-      data: {},
-      error: true,
-      message: "Unauthorized access to team",
-    });
-  }
-  const employees = await Team.findById(teamID).select({ employees: 1 });
-  res.status(200).send(employees);
+  const { employees } = await Team.findById(teamID).select("employees");
+  const filteredEmployees = employees.filter((employee) => !employee.cancelled);
+  res.status(200).send(filteredEmployees);
 };

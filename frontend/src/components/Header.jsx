@@ -4,10 +4,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { TeamContext } from "../contexts/TeamContext";
 
 const Header = () => {
-  const { team } = React.useContext(TeamContext);
+  const { team, logout} = React.useContext(TeamContext);
   const navigate = useNavigate();
   const handleLogout = async () => {
     await axios.post(`http://localhost:3000/auth/logout`);
+    logout(); 
     navigate("/");
   };
 

@@ -3,15 +3,6 @@ import ScoutedDriver from "../models/ScoutedDriver.js";
 export const addScoutedDriver = async (req, res) => {
   try {
     const teamID = req.params.id;
-
-    if (req.session.team._id !== teamID) {
-      return res.status(403).send({
-        data: {},
-        error: true,
-        message: "Unauthorized access to team",
-      });
-    }
-
     const scoutedDriver = new ScoutedDriver({
       ...req.body,
     });
@@ -27,18 +18,15 @@ export const addScoutedDriver = async (req, res) => {
 export const updateScoutedDriver = async (req, res) => {
   try {
     const teamID = req.params.id;
-    if (req.session.team._id !== teamID) {
-      return res.status(403).send({
-        data: {},
-        error: true,
-        message: "Unauthorized access to team",
-      });
-    }
     const scoutedDriverID = req.params.scoutedDriverID;
 
     const updatedScoutedDriver = await Team.findOneAndUpdate(
-      { _id: teamID, "scoutedDrivers._id": scoutedDriverID },
-      { $set: { "scoutedDrivers.$": { ...req.body, _id: scoutedDriverID} } },
+      {
+        _id: teamID,
+        "scoutedDrivers._id": scoutedDriverID,
+        "scoutedDrivers.cancelled": false,
+      },
+      { $set: { "scoutedDrivers.$": { ...req.body, _id: scoutedDriverID } } },
       { new: true }
     );
 
@@ -62,24 +50,29 @@ export const updateScoutedDriver = async (req, res) => {
 export const deleteScoutedDriver = async (req, res) => {
   try {
     const teamID = req.params.id;
-    if (req.session.team._id !== teamID) {
-      return res.status(403).send({
-        data: {},
-        error: true,
-        message: "Unauthorized access to team",
-      });
-    }
     const scoutedDriverID = req.params.scoutedDriverID;
 
     const updatedScoutedDriver = await Team.findOneAndUpdate(
-      { _id: teamID, "scoutedDrivers._id": scoutedDriverID },
-      { $set: { "scoutedDrivers.$.cancelled": true } }
+      {
+        _id: teamID,
+        "scoutedDrivers._id": scoutedDriverID,
+        scoutedDrivers: {
+          $elemMatch: {
+            _id: scoutedDriverID,
+            cancelled: false,
+          },
+        },
+      },
+      { $set: { "scoutedDrivers.$.cancelled": true } },
+      { new: true }
     );
 
-    if (!updatedScoutedDriver || updatedScoutedDriver.cancelled) {
-      return res
-        .status(200)
-        .send({ data: {}, error: true, message: "Scouted Driver not found" });
+    if (!updatedScoutedDriver) {
+      return res.status(200).send({
+        data: {},
+        error: true,
+        message: "Scouted Driver not found",
+      });
     }
 
     res.status(200).send({
@@ -92,15 +85,11 @@ export const deleteScoutedDriver = async (req, res) => {
 
 export const getScoutedDrivers = async (req, res) => {
   const teamID = req.params.id;
-  if (req.session.team._id !== teamID) {
-    return res.status(403).send({
-      data: {},
-      error: true,
-      message: "Unauthorized access to team",
-    });
-  }
-  const scoutedDrivers = await Team.findById(teamID).select({
-    scoutedDrivers: 1,
-  });
-  res.status(200).send(scoutedDrivers);
+  const { scoutedDrivers } = await Team.findById(teamID).select(
+    "scoutedDrivers"
+  );
+  const filteredScoutedDrivers = scoutedDrivers.filter(
+    (scoutedDriver) => !scoutedDriver.cancelled
+  );
+  res.status(200).send(filteredScoutedDrivers);
 };

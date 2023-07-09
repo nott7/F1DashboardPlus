@@ -18,7 +18,10 @@ const employeeSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  cancelled: Boolean,
+  cancelled: {
+    type: Boolean,
+    default: false,
+  },
   jobRole: {
     type: String,
     required: true,
@@ -26,7 +29,7 @@ const employeeSchema = new mongoose.Schema({
   description: {
     type: String,
     required: true,
-  }
+  },
 });
 
 export default mongoose.model("Employee", employeeSchema);

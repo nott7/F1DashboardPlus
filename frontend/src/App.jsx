@@ -8,21 +8,26 @@ import Driver from "./pages/Driver";
 import Employees from "./pages/Employees";
 import Scouting from "./pages/Scouting";
 import Login from "./pages/Login";
+import NoPage from "./pages/NoPage";
+import PrivateRouter from "./pages/PrivateRouter";
 
 function App() {
   //TODO - gestire quando non sei loggato
   return (
     <>
       <TeamContextProvider>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route element={<PrivateRouter />}>
             <Route path="/teams" element={<Teams />} />
             <Route path="/teams/:id" element={<Team />} />
             <Route path="/drivers/:id" element={<Driver />} />
             <Route path="/teams/:id/employees" element={<Employees />} />
             <Route path="/teams/:id/scouting" element={<Scouting />} />
-          </Routes>
+          </Route>
+          <Route path="*" element={<NoPage />} />
+        </Routes>
       </TeamContextProvider>
     </>
   );

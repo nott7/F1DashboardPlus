@@ -18,7 +18,10 @@ const scoutedDriverSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  cancelled: Boolean,
+  cancelled: {
+    type: Boolean,
+    default: false,
+  },
   category: {
     type: String,
     required: true,

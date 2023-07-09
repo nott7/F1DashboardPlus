@@ -9,9 +9,13 @@ export const TeamContextProvider = ({ children }) => {
     setTeam(team);
   };
 
+  const logout = () => {
+    setTeam({});
+  };
+
 
   return (
-    <TeamContext.Provider value={{ team, setCurrentTeam }}>
+    <TeamContext.Provider value={{ team, setCurrentTeam, logout}}>
       {children}
     </TeamContext.Provider>
   );
