@@ -4,11 +4,13 @@ import { TeamContext } from "../contexts/TeamContext";
 import Header from "../components/Header";
 import EmployeesHeader from "../components/Employees/EmployeesHeader";
 import Modal from "../components/Modal";
+import UpdateModal from "../components/UpdateModal";
 import ListItem from "../components/ListItem";
 
 const Employees = () => {
   const { team } = React.useContext(TeamContext);
   const [modal, setModal] = useState(false);
+  const [updateModal, setUpdateModal] = useState(false);
   const [employees, setEmployees] = useState([]);
   const [employee, setEmployee] = useState();
   async function fetchEmployees() {
@@ -21,38 +23,53 @@ const Employees = () => {
   function getEmployee(employee) {
     setEmployee(employee);
   }
-  const showModal = () => {
-    setModal(true);
+  const showModal = (isUpdate = false) => {
+    if (isUpdate) {
+      setUpdateModal(true);
+    } else {
+      setModal(true);
+    }
   };
 
-  const closeModal = () => {
-    setModal(false);
+  const closeModal = (isUpdate) => {
+    if (isUpdate) {
+      setUpdateModal(false);
+    } else {
+      setModal(false);
+    }
   };
 
   useEffect(() => {
     fetchEmployees();
-  }, [modal]);
+  }, [modal, updateModal]);
 
   return (
     <>
-      {modal && <div className="backdrop" onClick={closeModal}></div>}
+      {(modal || updateModal) && <div className="backdrop" onClick={closeModal}></div>}
       <Header />
       <main className="employees-container">
-        <EmployeesHeader showModal={showModal} />
+        <EmployeesHeader showModal={() => showModal(false)} />
         <ul>
           {employees.map((employee) => (
             <li key={employee._id} className="list-item">
               <ListItem
                 person={employee}
                 fetchEmployees={fetchEmployees}
-                showModal={showModal}
+                showModal={() => showModal(true)}
                 getEmployee={getEmployee}
               />
             </li>
           ))}
         </ul>
       </main>
-      {modal && <Modal closeModal={closeModal} person={employee} page="employees" />}
+      {modal && <Modal closeModal={() => closeModal(false)} page="employees" />}
+      {updateModal && (
+        <UpdateModal
+          closeModal={() => closeModal(true)}
+          person={employee}
+          page="employees"
+        />
+      )}
     </>
   );
 };

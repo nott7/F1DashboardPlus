@@ -19,24 +19,28 @@ export const updateScoutedDriver = async (req, res) => {
   try {
     const teamID = req.params.id;
     const scoutedDriverID = req.params.scoutedDriverID;
-
-    const updatedScoutedDriver = await Team.findOneAndUpdate(
-      {
-        _id: teamID,
-        "scoutedDrivers._id": scoutedDriverID,
-        "scoutedDrivers.cancelled": false,
-      },
-      { $set: { "scoutedDrivers.$": { ...req.body, _id: scoutedDriverID } } },
-      { new: true }
+    const team = await Team.findById(teamID);
+    const scoutedDriverIndex = team.scoutedDrivers.findIndex(
+      (scoutedDriver) =>
+        scoutedDriver._id == scoutedDriverID && !scoutedDriver.cancelled
     );
 
-    if (!updatedScoutedDriver) {
+    if (scoutedDriverIndex === -1) {
       return res.status(404).send({
         data: {},
         error: true,
         message: "Scouted Driver not found",
       });
     }
+
+    const updatedScoutedDriver = {
+      ...team.scoutedDrivers[scoutedDriverIndex]._doc, // Ho usato _doc per estrarre i dati dell'oggetto, altrimenti avrei avuto un oggetto con un sacco di proprietà in più del team
+      ...req.body,
+    };
+
+    team.scoutedDrivers[scoutedDriverIndex] = updatedScoutedDriver;
+
+    await team.save();
 
     res.status(200).send({
       message: "Scouted Driver updated successfully",

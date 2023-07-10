@@ -8,15 +8,15 @@ const employeeSchema = new mongoose.Schema({
   },
   name: {
     type: String,
-    required: true,
+    // required: true,
   },
   surname: {
     type: String,
-    required: true,
+    // required: true,
   },
   birthDate: {
     type: String,
-    required: true,
+    // required: true,
   },
   cancelled: {
     type: Boolean,
@@ -24,11 +24,11 @@ const employeeSchema = new mongoose.Schema({
   },
   jobRole: {
     type: String,
-    required: true,
+    // required: true,
   },
   description: {
     type: String,
-    required: true,
+    // required: true,
   },
 });
 

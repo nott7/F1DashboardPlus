@@ -4,12 +4,13 @@ import { TeamContext } from "../contexts/TeamContext";
 import Header from "../components/Header";
 import ScoutingHeader from "../components/Scouting/ScoutingHeader";
 import Modal from "../components/Modal";
+import UpdateModal from "../components/UpdateModal";
 import ListItem from "../components/ListItem";
 
 const Scouting = () => {
   const { team } = React.useContext(TeamContext);
-
   const [modal, setModal] = useState(false);
+  const [updateModal, setUpdateModal] = useState(false);
   const [scoutedDrivers, setScoutedDrivers] = useState([]);
   const [scoutedDriver, setScoutedDriver] = useState();
   async function fetchScoutedDrivers() {
@@ -22,31 +23,39 @@ const Scouting = () => {
   function getScoutedDriver(scoutedDriver) {
     setScoutedDriver(scoutedDriver);
   }
-  const showModal = () => {
-    setModal(true);
+  const showModal = (isUpdate) => {
+    if (isUpdate) {
+      setUpdateModal(true);
+    } else {
+      setModal(true);
+    }
   };
 
-  const closeModal = () => {
-    setModal(false);
+  const closeModal = (isUpdate) => {
+    if (isUpdate) {
+      setUpdateModal(false);
+    } else {
+      setModal(false);
+    }
   };
 
   useEffect(() => {
     fetchScoutedDrivers();
-  }, [modal]);
+  }, [modal, updateModal]);
 
   return (
     <>
-      {modal && <div className="backdrop" onClick={closeModal}></div>}
+      {(modal || updateModal) && <div className="backdrop" onClick={closeModal}></div>}
       <Header />
       <main className="scouting-container">
-        <ScoutingHeader showModal={showModal} />
+        <ScoutingHeader showModal={() => showModal(false)} />
         <ul>
           {scoutedDrivers.map((scoutedDriver) => (
             <li key={scoutedDriver._id} className="list-item">
               <ListItem
                 person={scoutedDriver}
                 fetchScoutedDrivers={fetchScoutedDrivers}
-                showModal={showModal}
+                showModal={() => showModal(true)}
                 getScoutedDriver={getScoutedDriver}
               />
             </li>
@@ -55,7 +64,14 @@ const Scouting = () => {
       </main>
 
       {modal && (
-        <Modal closeModal={closeModal} person={scoutedDriver} page="scouting" />
+        <Modal closeModal={() => closeModal(false)}  page="scouting" />
+      )}
+      {updateModal && (
+        <UpdateModal
+          closeModal={ () => closeModal(true)}
+          person={scoutedDriver}
+          page="scouting"
+        />
       )}
     </>
   );

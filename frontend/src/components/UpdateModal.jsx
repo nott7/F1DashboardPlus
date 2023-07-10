@@ -3,23 +3,20 @@ import { TeamContext } from "../contexts/TeamContext";
 
 import axios from "axios";
 
-const Modal = ({ closeModal, page }) => {
+const updateModal = ({ closeModal, page, person }) => {
   const { team } = React.useContext(TeamContext);
   const [formData, setFormData] = useState({});
 
   async function handleSubmit(e) {
     e.preventDefault();
-
-    const res = await axios.post(
+    const res = await axios.put(
       `http://localhost:3000/teams/${team._id}/${
         page === "scouting" ? "scoutedDrivers" : "employees"
-      }`,
+      }/${person._id}`,
       formData
     );
-
     closeModal();
   }
-
   function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
@@ -34,7 +31,7 @@ const Modal = ({ closeModal, page }) => {
             name="name"
             id="name"
             onChange={handleChange}
-            required
+            placeholder={person.name}
           />
         </div>
         <div className="form-item">
@@ -44,7 +41,7 @@ const Modal = ({ closeModal, page }) => {
             name="surname"
             id="surname"
             onChange={handleChange}
-            required
+            placeholder={person.surname}
           />
         </div>
         <div className="form-item">
@@ -54,19 +51,14 @@ const Modal = ({ closeModal, page }) => {
             name="birthDate"
             id="birth-date"
             onChange={handleChange}
-            required
+            placeholder={person.birthDate}
           />
         </div>
 
         {page === "scouting" && (
           <div className="form-item">
             <label htmlFor="category">Category</label>
-            <select
-              name="category"
-              id="category"
-              onChange={handleChange}
-              required
-            >
+            <select name="category" id="category" onChange={handleChange}>
               <option value="">Choose One...</option>
               <option value="Formula 2">Formula 2</option>
               <option value="Formula 3">Formula 3</option>
@@ -82,13 +74,8 @@ const Modal = ({ closeModal, page }) => {
         {page === "employees" && (
           <div className="form-item">
             <label htmlFor="jobRole">Job Role</label>
-            <select
-              name="jobRole"
-              id="job-role"
-              onChange={handleChange}
-              required
-            >
-              <option value="">Choose One...</option>
+            <select name="jobRole" id="job-role" onChange={handleChange}>
+            <option value="">Choose One...</option>
               <option value="Aerodynamic Engineer">Aerodynamic Engineer</option>
               <option value="Race Engineer">Race Engineer</option>
               <option value="Data Engineer">Data Engineer</option>
@@ -104,7 +91,6 @@ const Modal = ({ closeModal, page }) => {
             id="description"
             rows="1"
             onChange={handleChange}
-            required
           ></textarea>
         </div>
         <div className="form-item">
@@ -118,4 +104,4 @@ const Modal = ({ closeModal, page }) => {
   );
 };
 
-export default Modal;
+export default updateModal;

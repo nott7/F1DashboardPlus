@@ -8,7 +8,6 @@ import axios from "axios";
 const Team = () => {
   const { id } = useParams();
   const [team, setTeam] = useState({});
-  //cambiare immagine alfaromeo
 
   useEffect(() => {
     async function fetchTeam() {

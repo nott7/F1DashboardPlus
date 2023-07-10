@@ -20,7 +20,7 @@ async function main() {
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors({
-  origin: "https://c451-2001-b07-a9a-89a8-9562-395e-ffca-2d8d.ngrok-free.app",
+  origin: "http://localhost:5173",
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE"]
 }));
@@ -30,9 +30,8 @@ app.use(
     resave: false,
     saveUninitialized: true,
     cookie: {
-      secure: true,  // da passare a true quando passiamo in https
+      secure: false,  // da passare a true quando passiamo in https
       maxAge: 8*60*60*1000,
-      sameSite: "none",
     },
     store: new MongoStore({ mongoUrl: process.env.MONGO_URL}),
   })

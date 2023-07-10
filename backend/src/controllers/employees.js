@@ -20,22 +20,25 @@ export const updateEmployee = async (req, res) => {
   try {
     const teamID = req.params.id;
     const employeeID = req.params.employeeID;
-
-    const updatedEmployee = await Team.findOneAndUpdate(
-      {
-        _id: teamID,
-        "employees._id": employeeID,
-        "employees.cancelled": false,
-      },
-      { $set: { "employees.$": { ...req.body, _id: employeeID } } },
-      { new: true }
+    const team = await Team.findById(teamID);
+    const employeeIndex = team.employees.findIndex(
+      (employee) => employee._id == employeeID && !employee.cancelled
     );
 
-    if (!updatedEmployee) {
+    if (employeeIndex === -1) {
       return res
         .status(404)
         .send({ data: {}, error: true, message: "Employee not found" });
     }
+
+    const updatedEmployee = {
+      ...team.employees[employeeIndex]._doc, // Ho usato _doc per estrarre i dati dell'oggetto, altrimenti avrei avuto un oggetto con un sacco di proprietà in più del team
+      ...req.body,
+    }
+
+    team.employees[employeeIndex] = updatedEmployee;
+
+    await team.save();
 
     res.status(200).send({
       message: "Employee updated successfully",
