@@ -6,21 +6,15 @@ import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const ListItem = ({ person, showModal, fetchEmployees, fetchScoutedDrivers, getScoutedDriver, getEmployee }) => {
   const { team } = React.useContext(TeamContext);
-  async function handleDelete() {
+  const handleDelete = async () => {
     const res = await axios.delete(
       `http://localhost:3000/teams/${team._id}/${
         person.jobRole ? "employees" : "scoutedDrivers"
       }/${person._id}`
     );
-    console.log(res);
-    console.log(
-      `http://localhost:3000/teams/${team._id}/${
-        person.jobRole ? "employees" : "scoutedDrivers"
-      }/${person._id}`
-    );
-
     person.jobRole ? fetchEmployees() : fetchScoutedDrivers();
-  }
+  };
+
   return (
     <div className="list-item_container">
       <div className="list-item_details">

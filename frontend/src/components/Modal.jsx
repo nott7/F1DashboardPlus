@@ -6,8 +6,7 @@ import axios from "axios";
 const Modal = ({ closeModal, page }) => {
   const { team } = React.useContext(TeamContext);
   const [formData, setFormData] = useState({});
-
-  async function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const res = await axios.post(
@@ -18,11 +17,11 @@ const Modal = ({ closeModal, page }) => {
     );
 
     closeModal();
-  }
+  };
 
-  function handleChange(e) {
+  const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  }
+  };
 
   return (
     <div className="modal-container">

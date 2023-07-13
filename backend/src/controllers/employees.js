@@ -12,7 +12,7 @@ export const addEmployee = async (req, res) => {
     });
     res.status(201).send({ message: "Employee created successfully" });
   } catch (error) {
-    res.status(500).send({ data: {}, error: true, message: error.message });
+    res.status(200).send({ data: {}, error: true, message: error.message });
   }
 };
 
@@ -27,7 +27,7 @@ export const updateEmployee = async (req, res) => {
 
     if (employeeIndex === -1) {
       return res
-        .status(404)
+        .status(200)
         .send({ data: {}, error: true, message: "Employee not found" });
     }
 
@@ -44,7 +44,7 @@ export const updateEmployee = async (req, res) => {
       message: "Employee updated successfully",
     });
   } catch (error) {
-    res.status(500).send({ error: true, message: error.message });
+    res.status(200).send({ error: true, message: error.message });
   }
 };
 
@@ -79,7 +79,7 @@ export const deleteEmployee = async (req, res) => {
       message: "Employee cancelled successfully",
     });
   } catch (error) {
-    res.status(500).send({ data: {}, error: true, message: error.message });
+    res.status(200).send({ data: {}, error: true, message: error.message });
   }
 };
 

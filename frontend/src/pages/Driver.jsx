@@ -1,19 +1,22 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import DriverHeader from "../components/Driver/DriverHeader";
 import DriverStats from "../components/Driver/DriverStats";
+import Loader from "../components/Loader";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
 const Driver = () => {
   const { id } = useParams();
   const [driver, setDriver] = useState({});
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function fetchDriver() {
+    const fetchDriver = async () => {
       const res = await axios.get(`http://localhost:3000/drivers/${id}`);
       setDriver(res.data);
-    }
+      setLoading(false);
+    };
     fetchDriver();
   }, [id]);
 
@@ -21,8 +24,14 @@ const Driver = () => {
     <>
       <Header />
       <main className="driver-container">
-        <DriverHeader driver={driver} />
-        <DriverStats driver={driver} />
+        {loading ? (
+          <Loader />
+        ) : (
+          <>
+            <DriverHeader driver={driver} />
+            <DriverStats driver={driver} />
+          </>
+        )}
       </main>
     </>
   );

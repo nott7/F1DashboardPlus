@@ -9,16 +9,9 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
-  function handleEmailChange(e) {
-    setEmail(e.target.value);
-  }
-  function handlePasswordChange(e) {
-    setPassword(e.target.value);
-  }
-
   axios.defaults.withCredentials = true;
 
-  async function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const res = await axios.post("http://localhost:3000/auth/login", {
       email,
@@ -41,7 +34,7 @@ const Login = () => {
         <input
           type="email"
           value={email}
-          onChange={handleEmailChange}
+          onChange={(e) => setEmail(e.target.value)}
           placeholder="Email"
           required
         />
@@ -49,7 +42,7 @@ const Login = () => {
         <input
           type="password"
           value={password}
-          onChange={handlePasswordChange}
+          onChange={(e) => setPassword(e.target.value)}
           placeholder="Password"
           required
         />

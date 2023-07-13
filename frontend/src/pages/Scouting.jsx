@@ -6,6 +6,7 @@ import ScoutingHeader from "../components/Scouting/ScoutingHeader";
 import Modal from "../components/Modal";
 import UpdateModal from "../components/UpdateModal";
 import ListItem from "../components/ListItem";
+import Loader from "../components/Loader";
 
 const Scouting = () => {
   const { team } = React.useContext(TeamContext);
@@ -13,16 +14,21 @@ const Scouting = () => {
   const [updateModal, setUpdateModal] = useState(false);
   const [scoutedDrivers, setScoutedDrivers] = useState([]);
   const [scoutedDriver, setScoutedDriver] = useState();
-  async function fetchScoutedDrivers() {
+  const [loading, setLoading] = useState(true);
+
+  const fetchScoutedDrivers = async () => {
     const res = await axios.get(
       `http://localhost:3000/teams/${team._id}/scoutedDrivers`
     );
     const scoutedDrivers = res.data;
     setScoutedDrivers(scoutedDrivers);
-  }
-  function getScoutedDriver(scoutedDriver) {
+    setLoading(false);
+  };
+
+  const getScoutedDriver = (scoutedDriver) => {
     setScoutedDriver(scoutedDriver);
-  }
+  };
+
   const showModal = (isUpdate) => {
     if (isUpdate) {
       setUpdateModal(true);
@@ -45,10 +51,16 @@ const Scouting = () => {
 
   return (
     <>
-      {(modal || updateModal) && <div className="backdrop" onClick={closeModal}></div>}
+      {(modal || updateModal) && (
+        <div className="backdrop" onClick={closeModal}></div>
+      )}
       <Header />
       <main className="scouting-container">
         <ScoutingHeader showModal={() => showModal(false)} />
+        {loading ? ( 
+          <Loader />
+        ) : (
+
         <ul>
           {scoutedDrivers.map((scoutedDriver) => (
             <li key={scoutedDriver._id} className="list-item">
@@ -61,14 +73,13 @@ const Scouting = () => {
             </li>
           ))}
         </ul>
+        )}
       </main>
 
-      {modal && (
-        <Modal closeModal={() => closeModal(false)}  page="scouting" />
-      )}
+      {modal && <Modal closeModal={() => closeModal(false)} page="scouting" />}
       {updateModal && (
         <UpdateModal
-          closeModal={ () => closeModal(true)}
+          closeModal={() => closeModal(true)}
           person={scoutedDriver}
           page="scouting"
         />

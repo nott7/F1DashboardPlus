@@ -7,7 +7,7 @@ const updateModal = ({ closeModal, page, person }) => {
   const { team } = React.useContext(TeamContext);
   const [formData, setFormData] = useState({});
 
-  async function handleSubmit(e) {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const res = await axios.put(
       `http://localhost:3000/teams/${team._id}/${
@@ -16,10 +16,11 @@ const updateModal = ({ closeModal, page, person }) => {
       formData
     );
     closeModal();
-  }
-  function handleChange(e) {
+  };
+
+  const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  }
+  };
 
   return (
     <div className="modal-container">
@@ -75,7 +76,7 @@ const updateModal = ({ closeModal, page, person }) => {
           <div className="form-item">
             <label htmlFor="jobRole">Job Role</label>
             <select name="jobRole" id="job-role" onChange={handleChange}>
-            <option value="">Choose One...</option>
+              <option value="">Choose One...</option>
               <option value="Aerodynamic Engineer">Aerodynamic Engineer</option>
               <option value="Race Engineer">Race Engineer</option>
               <option value="Data Engineer">Data Engineer</option>

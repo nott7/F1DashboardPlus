@@ -11,7 +11,7 @@ export const addScoutedDriver = async (req, res) => {
     });
     res.status(201).send({ message: "Scouted Driver created successfully" });
   } catch (error) {
-    res.status(500).send({ data: {}, error: true, message: error.message });
+    res.status(200).send({ data: {}, error: true, message: error.message });
   }
 };
 
@@ -26,7 +26,7 @@ export const updateScoutedDriver = async (req, res) => {
     );
 
     if (scoutedDriverIndex === -1) {
-      return res.status(404).send({
+      return res.status(200).send({
         data: {},
         error: true,
         message: "Scouted Driver not found",
@@ -47,7 +47,7 @@ export const updateScoutedDriver = async (req, res) => {
       data: updatedScoutedDriver,
     });
   } catch (error) {
-    res.status(500).send({ error: true, message: error.message });
+    res.status(200).send({ error: true, message: error.message });
   }
 };
 
@@ -83,7 +83,7 @@ export const deleteScoutedDriver = async (req, res) => {
       message: "Scouted Driver cancelled successfully",
     });
   } catch (error) {
-    res.status(500).send({ error: true, message: error.message });
+    res.status(200).send({ error: true, message: error.message });
   }
 };
 

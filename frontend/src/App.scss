@@ -6,7 +6,6 @@ $text-color-secondary: #9e9e9e;
 $box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
   rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
 
-
 body {
   font-family: "Chivo", sans-serif;
   background-color: $bg-color;
@@ -422,7 +421,8 @@ main {
     }
   }
 
-  .teams-item, .drivers-item {
+  .teams-item,
+  .drivers-item {
     display: flex;
     background-color: $primary-color;
     color: $text-color;
@@ -453,5 +453,50 @@ main {
         font-weight: bold;
       }
     }
+  }
+}
+
+.loader {
+  width: 100px;
+  height: 100px;
+  margin: 110px auto 0;
+  border: solid 10px $primary-color;
+  border-radius: 50%;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  -webkit-transition: all 0.5s ease-in;
+  -webkit-animation-name: rotate;
+  -webkit-animation-duration: 1s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+
+  transition: all 0.5s ease-in;
+  animation-name: rotate;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.loader.white {
+  border-color: $bg-color;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes rotate {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
   }
 }

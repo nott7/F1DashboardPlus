@@ -4,7 +4,6 @@ import { TeamContext } from "../contexts/TeamContext";
 
 const PrivateRouter = () => {
   const { team } = React.useContext(TeamContext);
-  console.log(team);
   if (!team._id) {
     return <Navigate to="/" />;
   }
