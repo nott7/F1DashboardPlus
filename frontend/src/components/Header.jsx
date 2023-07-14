@@ -1,17 +1,17 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { TeamContext } from "../contexts/TeamContext";
 
 const Header = () => {
-  const { team, logout} = React.useContext(TeamContext);
+  const { team, logout } = useContext(TeamContext);
+  const [isOpened, setIsOpened] = useState(false);
   const navigate = useNavigate();
   const handleLogout = async () => {
     await axios.post(`http://localhost:3000/auth/logout`);
-    logout(); 
+    logout();
     navigate("/");
   };
-
 
   return (
     <header className="main-header">
@@ -22,14 +22,21 @@ const Header = () => {
           </Link>
         </div>
         <div className="header-top_center">
-        <h1 className="header-team_name">{team.name}</h1>
+          <h1 className="header-team_name">{team.name}</h1>
         </div>
         <div className="header-top_right">
-        <button className="header-button" onClick={handleLogout}>Logout</button>
+          <button className="header-button" onClick={handleLogout}>
+            Logout
+          </button>
+          <div className="menu-button" onClick={() => setIsOpened(!isOpened)}>
+            <div className="menu-line"></div>
+            <div className="menu-line"></div>
+            <div className="menu-line"></div>
+          </div>
         </div>
       </div>
       <nav className="header-bottom">
-        <ul className="header-nav">
+        <ul className={isOpened ? "header-nav opened" : "header-nav"}>
           <li className="header-nav-item">
             <Link to={`/teams/${team._id}`}>
               <p className="header-nav-item-link">Home</p>
@@ -55,6 +62,7 @@ const Header = () => {
               <p className="header-nav-item-link">Scouting</p>
             </Link>
           </li>
+          <button onClick={handleLogout}>Logout</button>
         </ul>
       </nav>
     </header>

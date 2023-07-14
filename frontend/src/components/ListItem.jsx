@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import axios from "axios";
 import { TeamContext } from "../contexts/TeamContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 
-const ListItem = ({ person, showModal, fetchEmployees, fetchScoutedDrivers, getScoutedDriver, getEmployee }) => {
-  const { team } = React.useContext(TeamContext);
+const ListItem = ({
+  person,
+  showModal,
+  fetchEmployees,
+  fetchScoutedDrivers,
+  getScoutedDriver,
+  getEmployee,
+}) => {
+  const { team } = useContext(TeamContext);
   const handleDelete = async () => {
     const res = await axios.delete(
       `http://localhost:3000/teams/${team._id}/${
@@ -29,10 +36,13 @@ const ListItem = ({ person, showModal, fetchEmployees, fetchScoutedDrivers, getS
         </details>
       </div>
       <div className="list-item_settings">
-        <button className="list-item_settings-button" onClick={ () => {
-          showModal();
-          person.jobRole ? getEmployee(person) : getScoutedDriver(person);
-        }}>
+        <button
+          className="list-item_settings-button"
+          onClick={() => {
+            showModal();
+            person.jobRole ? getEmployee(person) : getScoutedDriver(person);
+          }}
+        >
           <FontAwesomeIcon icon={faPencil} />
         </button>
         <button className="list-item_settings-button" onClick={handleDelete}>

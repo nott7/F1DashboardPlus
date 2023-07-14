@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { TeamContext } from "../contexts/TeamContext";
 import Header from "../components/Header";
@@ -9,7 +9,7 @@ import ListItem from "../components/ListItem";
 import Loader from "../components/Loader";
 
 const Scouting = () => {
-  const { team } = React.useContext(TeamContext);
+  const { team } = useContext(TeamContext);
   const [modal, setModal] = useState(false);
   const [updateModal, setUpdateModal] = useState(false);
   const [scoutedDrivers, setScoutedDrivers] = useState([]);

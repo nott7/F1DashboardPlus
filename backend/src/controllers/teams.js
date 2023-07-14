@@ -9,7 +9,7 @@ export const getTeam = async (req, res) => {
   const team = await Team.findById(req.params.id).select({
     password: 0,
     email: 0,
-  });
+  }); // Usato per non mostrare la password e l'email
   if (!team) {
     return res.status(200).send({
       data: {},

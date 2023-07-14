@@ -1,5 +1,5 @@
 import "./App.scss";
-import { Routes, Route, Router } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { TeamContextProvider } from "./contexts/TeamContext";
 import Home from "./pages/Home";
 import Team from "./pages/Team";

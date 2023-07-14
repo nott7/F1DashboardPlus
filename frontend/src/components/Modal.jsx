@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { TeamContext } from "../contexts/TeamContext";
 
 import axios from "axios";
 
 const Modal = ({ closeModal, page }) => {
-  const { team } = React.useContext(TeamContext);
+  const { team } = useContext(TeamContext);
   const [formData, setFormData] = useState({});
   const handleSubmit = async (e) => {
     e.preventDefault();
