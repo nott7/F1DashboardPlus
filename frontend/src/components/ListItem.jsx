@@ -4,6 +4,22 @@ import { TeamContext } from "../contexts/TeamContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPencil, faTrash } from "@fortawesome/free-solid-svg-icons";
 
+
+// ALBERTO 
+
+function x(par1) {
+  par1 = 43
+}
+
+let par1 = 0
+x(par1)
+console.log(par1)
+
+
+// ALBERTO
+
+
+
 const ListItem = ({
   person,
   showModal,
